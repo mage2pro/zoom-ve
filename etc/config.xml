@@ -1,0 +1,41 @@
+<?xml version='1.0'?>
+<config xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Store:etc/config.xsd'>
+	<default>
+		<carriers>
+			<zoomenvios>
+				<active>1</active>
+				<allowed_methods>1,2,3</allowed_methods>
+				<display_delivery_time>1</display_delivery_time>
+				<gateway_url>https://sandbox.zoom.red/baaszoom/public/canguroazul/CalcularTarifa</gateway_url>
+				<handling_type>F</handling_type>
+				<max_package_weight>150</max_package_weight>
+				<mode_type>DOR</mode_type>
+				<model>Dfe\ZoomVe\Model\Carrier</model>
+				<name>Zoom Envios</name>
+				<sallowspecific>0</sallowspecific>
+				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
+				<title>Zoom Envios</title>
+<!-- 2025-05-24 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+"`zoom.red` requires a weight for `CalcularTarifa`": https://github.com/ferreteo-com/site/issues/4 -->
+				<weight__default>0.1</weight__default>
+			</zoomenvios>
+		</carriers>
+		<csp>
+			<mode>
+				<storefront>
+					<report_uri>https://www.ferreteo.com/</report_uri>
+				</storefront>
+				<admin>
+					<report_uri>https://www.ferreteo.com/</report_uri>
+				</admin>
+			</mode>
+			<policies>
+				<storefront>
+					<frame-ancestors>
+						<inline>0</inline>
+					</frame-ancestors>
+				</storefront>
+			</policies>
+		</csp>
+	</default>
+</config>

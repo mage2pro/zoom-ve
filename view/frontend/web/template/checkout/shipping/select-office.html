@@ -1,0 +1,14 @@
+ <div data-bind="visible: isOfficeDisplayable()">
+	 <input type="hidden" id="pickup-office" name="pickup_office" value="" />
+	 <p id="selected-office-msg"><span></span> office is selected to pick up your products.</p>
+	 <div id="office-container">
+		<select class="select office" id="officeDropdown"
+			data-bind="options: availableOffice(),
+					   optionsText: 'label',
+					   optionsValue: 'value',
+					   value: selectedOffice,
+					   optionsCaption: '- Select Office -'">
+		</select>
+	 </div>
+ </div>
+<div id="office-error-msg" role="alert" class="message notice" style="display: none"><span></span></div>

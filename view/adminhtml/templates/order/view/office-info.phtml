@@ -1,0 +1,17 @@
+<div id="office-info-wrapper">
+	<?php if($block->getPickupOffice()): ?>
+		<strong><?php echo __('Selected Office') ?>:</strong>
+		<span class="price">
+			<?php echo $this->helper('Dfe\ZoomVe\Helper\Data')->getOfficeNameByCode(
+			$block->getPickupOffice()); ?>
+		</span>
+	<?php endif; ?>
+	</div>
+<script type="text/javascript">
+	require(
+		['jquery'],
+		function($) {
+			$('#office-info-wrapper').appendTo('.order-shipping-method div:last-child');
+		}
+	);
+</script>

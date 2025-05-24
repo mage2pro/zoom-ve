@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<page xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
+	<body>
+		<referenceBlock name='order_tab_info'>
+			<block class='Magento\Sales\Block\Adminhtml\Order\AbstractOrder' name='order_shipping_view' template='Dfe_ZoomVe::order/view/info.phtml'/>
+			<!--<block class='Dfe\ZoomVe\Block\Adminhtml\Order\Totals' name='order_totals' template='Magento_Sales::order/totals.phtml'>
+				<block class='Magento\Sales\Block\Adminhtml\Order\Totals\Tax' name='tax' template='Magento_Sales::order/totals/tax.phtml'/>
+			</block>-->
+		</referenceBlock>
+	</body>
+</page>

@@ -1,0 +1,11 @@
+<?xml version='1.0'?>
+<page xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='urn:magento:framework:View/Layout/etc/page_configuration.xsd'>
+	<body>
+		<referenceBlock class='Magento\Sales\Block\Adminhtml\Order\Create\Data' template='Magento_Sales::order/create/data.phtml' name='data'>
+			<block class='Dfe\ZoomVe\Block\Adminhtml\Order\Create\Totals' template='Magento_Sales::order/create/totals.phtml' name='totals'/>
+			<block class='Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method' template='Magento_Sales::order/create/abstract.phtml' name='shipping_method'>
+				<block class='Dfe\ZoomVe\Block\Adminhtml\Order\Create\Shipping\Method\Form' template='Dfe_ZoomVe::order/create/shipping/method/form.phtml' name='order_create_shipping_form' as='form'/>
+			</block>
+		</referenceBlock>
+	</body>
+</page>

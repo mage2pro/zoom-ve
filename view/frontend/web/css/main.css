@@ -1,0 +1,9 @@
+
+#selected-office-msg { display: none; margin-top: 20px;}
+#selected-office-msg span { font-weight: bold; }
+.select.office {
+	width: 350px;
+	color: #7d7d7d;
+	border-radius: 15px;
+}
+#checkout-shipping-method-load span {font-weight: bold;}
