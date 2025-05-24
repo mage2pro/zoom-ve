@@ -20,6 +20,6 @@
         }
 	]
 	,"require": {"mage2pro/core": ">=11.4.6"}
-	,"autoload": {"files": ["registration.php"], "psr-4": {"Acx\\ZoomEnvios\\": ""}}
+	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\ZoomVe\\": ""}}
 	,"keywords": ["Magento 2"]
 }
