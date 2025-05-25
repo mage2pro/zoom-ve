@@ -572,14 +572,15 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 	}
 
 	/**
-	 * get unformatted Amount from VEF amount
 	 * @param $amount
 	 * @param $currency
 	 * @return string|string[]
 	 */
 	protected function _getRawAmount($amount, $currency) {
 		$currencyFormat = [
-			"VEF" => [
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# "Replace the `VEF` currency with `VES`": https://github.com/mage2pro/zoom-ve/issues/10
+			'VES' => [
 				"accuracy"  => ".",
 				"precision" => ","
 			]
