@@ -66,7 +66,9 @@ class DataProvider implements ConfigProviderInterface
 	]]];}
 
 	/**
-	 * 2025-05-25
+	 * 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+	 * `getOficinas`:
+	 * https://documenter.getpostman.com/view/6789630/S1Zz6V2v#18546b41-9e98-4c4a-b782-c9b10c9d33a6
 	 * @used-by self::getConfig()
 	 * @used-by \Dfe\ZoomVe\Controller\Index\Office::execute()
 	 */
