@@ -458,9 +458,11 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		}
 
 		$result = $this->_rateFactory->create();
-		$vefRate = $this->_getBaseCurrencyRate("VEF");
-		//$total = (double) $rowRequest->getBaseSubtotalInclTax() * $vefRate;
-		$total = (double) $rowRequest->getValue() * $vefRate;
+		# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# "Replace the `VEF` currency with `VES`": https://github.com/mage2pro/zoom-ve/issues/10
+		$vesRate = $this->_getBaseCurrencyRate('VES');
+		//$total = (double) $rowRequest->getBaseSubtotalInclTax() * $vesRate;
+		$total = (double) $rowRequest->getValue() * $vesRate;
 		$params = [
 			'ciudad_remitente' => $rowRequest->getOrigCity(), //Sender city
 			'valor_mercancia' => 0, //$total,
@@ -478,7 +480,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		# I use 15 to ensure that the API call does not fail.
 		# 2) The maximum value of `valor_declarado` seems to be 5000 USD.
 		# I use 4500 to ensure that the API call does not fail.
-		$params['valor_declarado'] = min(max($total, 15 * $vefRate), 4500 * $vefRate);
+		$params['valor_declarado'] = min(max($total, 15 * $vesRate), 4500 * $vesRate);
 		$allowedMethods = $this->getAllowedMethods();
 		$modeTypes = $this->configHelper->getCode('mode_type');
 		$responseBodies = array();
@@ -610,8 +612,6 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 				$row = explode('%', $rRow);
 				$total = isset(json_decode($row[0],true)["entidadRespuesta"]["total"])
 				? json_decode($row[0],true)["entidadRespuesta"]["total"] : null;
-
-				//$total = $this->_getRawAmount($total, "VEF");
 				if ($total) {
 					$responsePrice = $this->_localeFormat->getNumber($total);
 					$costArr[$method] = $responsePrice;
@@ -623,7 +623,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		}
 
 		$result = $this->_rateFactory->create();
-		$vefRate = $this->_getBaseCurrencyRate("VEF");
+		$vesRate = $this->_getBaseCurrencyRate("VEF");
 
 		/*$priceArr = $costArr = array(
 			'1-1' => 0.0,
@@ -648,7 +648,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 				$methodMode = $this->_parseMethodMode($method);
 
 				//$modeTitle = $this->configHelper->getCode('mode_type_description', $mode);
-				$price = (double)$price / $vefRate;
+				$price = (double)$price / $vesRate;
 				$methodTitle = str_replace("-", "- <span>",
 					$this->configHelper->getCode('method', $method)) . "</span>";
 
@@ -657,7 +657,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 					$price = 0;
 				}
 				$cost = (isset($costArr[$method])) ?
-					(double)$costArr[$method] / $vefRate : null;
+					(double)$costArr[$method] / $vesRate : null;
 
 				$rate->setMethodTitle($methodTitle);
 				$rate->setCost($cost);
