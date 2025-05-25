@@ -25,12 +25,9 @@ class Generic implements GenericInterface
 	}
 
 	/**
-	 * Returns array to be used in multiselect on back-end
-	 *
 	 * @return array
 	 */
-	function toOptionArray()
-	{
+	function toOptionArray() {
 		$configData = $this->carrierConfig->getCode($this->_code);
 		$arr = [];
 		foreach ($configData as $code => $title) {
