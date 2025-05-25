@@ -65,8 +65,11 @@ class DataProvider implements ConfigProviderInterface
 		'offices' => $this->getOffices($this->_cart->getQuote()->getShippingAddress()->getCity())
 	]]];}
 
-	function getOffices($city = null)
-	{
+	/**
+	 * 2025-05-25
+	 * @used-by self::getConfig()
+	 */
+	function getOffices($city = null) {
 		$officeListStr = $this->configHelper->getCode('origin_city', [strtoupper($city),'office_code']);
 		$officeListArr = explode(',', $officeListStr);
 		$offices = $this->configHelper->getCode('office');
