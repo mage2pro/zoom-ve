@@ -61,25 +61,22 @@ class DataProvider implements ConfigProviderInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	function getConfig()
-	{
-		//$city = $this->_checkoutSession->getQuote()-getShippingAddress()->getCity();
-		$city = $this->_cart->getQuote()->getShippingAddress()->getCity();
-		$cityId = $this->configHelper->getCode('origin_city', [strtoupper($city),'code']);
-		$config = [
-			'shipping' => [
-				'select_office' => [
-					'offices' => $this->getOffices($city)
-				]
-			]
-		];
+	function getConfig() {return ['shipping' => ['select_office' => [
+		'offices' => $this->getOffices($this->_cart->getQuote()->getShippingAddress()->getCity())
+	]]];}
 
-		return $config;
-	}
-
-	function getOffices($city = null)
-	{
-		$officeListStr = $this->configHelper->getCode('origin_city', [strtoupper($city),'office_code']);
+	/**
+	 * 2025-05-25
+	 * @used-by self::getConfig()
+	 */
+	function getOffices(?string $city = '') {
+		$officeListStr = $this->configHelper->getCode('origin_city', [
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# «strtoupper(): Passing null to parameter #1 ($string) of type string is deprecated
+			# in vendor/mage2pro/zoom-ve/Model/Checkout/DataProvider.php on line 68»:
+			# https://github.com/mage2pro/zoom-ve/issues/4
+			mb_strtoupper((string)$city),'office_code'
+		]);
 		$officeListArr = explode(',', $officeListStr);
 		$offices = $this->configHelper->getCode('office');
 		$offices_arr = array();

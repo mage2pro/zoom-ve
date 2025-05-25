@@ -68,9 +68,16 @@ class DataProvider implements ConfigProviderInterface
 	/**
 	 * 2025-05-25
 	 * @used-by self::getConfig()
+	 * @used-by \Dfe\ZoomVe\Controller\Index\Office::execute()
 	 */
-	function getOffices($city = null) {
-		$officeListStr = $this->configHelper->getCode('origin_city', [strtoupper($city),'office_code']);
+	function getOffices(?string $city = '') {
+		$officeListStr = $this->configHelper->getCode('origin_city', [
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# «strtoupper(): Passing null to parameter #1 ($string) of type string is deprecated
+			# in vendor/mage2pro/zoom-ve/Model/Checkout/DataProvider.php on line 68»:
+			# https://github.com/mage2pro/zoom-ve/issues/4
+			mb_strtoupper((string)$city),'office_code'
+		]);
 		$officeListArr = explode(',', $officeListStr);
 		$offices = $this->configHelper->getCode('office');
 		$offices_arr = array();
