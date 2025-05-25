@@ -1,5 +1,6 @@
 <?php
 namespace Dfe\ZoomVe\Model\Config\Source;
+use Dfe\ZoomVe\Helper\Config as C;
 use Magento\Shipping\Model\Carrier\Source\GenericInterface;
 class Generic implements GenericInterface
 {
@@ -16,11 +17,11 @@ class Generic implements GenericInterface
 	protected $_code = '';
 
 	/**
-	 * @param \Dfe\ZoomVe\Helper\Config $carrierConfig
+	 * 2025-05-25
 	 */
-	function __construct(\Dfe\ZoomVe\Helper\Config $carrierConfig)
+	function __construct(C $c)
 	{
-		$this->carrierConfig = $carrierConfig;
+		$this->carrierConfig = $c;
 	}
 
 	/**
