@@ -61,20 +61,9 @@ class DataProvider implements ConfigProviderInterface
 	/**
 	 * {@inheritdoc}
 	 */
-	function getConfig()
-	{
-		//$city = $this->_checkoutSession->getQuote()-getShippingAddress()->getCity();
-		$city = $this->_cart->getQuote()->getShippingAddress()->getCity();
-		$config = [
-			'shipping' => [
-				'select_office' => [
-					'offices' => $this->getOffices($city)
-				]
-			]
-		];
-
-		return $config;
-	}
+	function getConfig() {return ['shipping' => ['select_office' => [
+		'offices' => $this->getOffices($this->_cart->getQuote()->getShippingAddress()->getCity())
+	]]];}
 
 	function getOffices($city = null)
 	{
