@@ -65,7 +65,6 @@ class DataProvider implements ConfigProviderInterface
 	{
 		//$city = $this->_checkoutSession->getQuote()-getShippingAddress()->getCity();
 		$city = $this->_cart->getQuote()->getShippingAddress()->getCity();
-		$cityId = $this->configHelper->getCode('origin_city', [strtoupper($city),'code']);
 		$config = [
 			'shipping' => [
 				'select_office' => [
