@@ -15,7 +15,7 @@ class Unitofmeasure extends \Dfe\ZoomVe\Model\Config\Source\Generic
 	 */
 	function toOptionArray()
 	{
-		$unitArr = $this->carrierConfig->getCode($this->_code);
+		$unitArr = dfe_zv_cfg()->getCode($this->_code);
 		$returnArr = [];
 		foreach ($unitArr as $key => $val) {
 			$returnArr[] = ['value' => $key, 'label' => $key];
