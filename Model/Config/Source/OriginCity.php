@@ -15,7 +15,7 @@ class OriginCity extends \Dfe\ZoomVe\Model\Config\Source\Generic
 	 */
 	function toOptionArray()
 	{
-		$orCityArr = $this->carrierConfig->getCode($this->_code);
+		$orCityArr = dfe_zv_cfg()->getCode($this->_code);
 		$returnArr = [];
 		foreach ($orCityArr as $key => $val) {
 			$returnArr[] = ['value' => $key, 'label' => $key];
