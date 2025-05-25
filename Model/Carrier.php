@@ -319,8 +319,12 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 
 		if ($request->getOrigCity()) {
 			$rowRequest->setOrigCity($request->getOrigCity());
-		} else {
-			$originCity = strtoupper( $this->_scopeConfig->getValue(
+		}
+		else {
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
+			# https://github.com/mage2pro/zoom-ve/issues/6
+			$originCity = mb_strtoupper( $this->_scopeConfig->getValue(
 				OrderShipment::XML_PATH_STORE_CITY,
 				ScopeInterface::SCOPE_STORE,
 				$request->getStoreId()
