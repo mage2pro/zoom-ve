@@ -2,22 +2,23 @@
 namespace Dfe\ZoomVe\Model;
 use Dfe\ZoomVe\Block\System\Config\Form\Field\Locations;
 use Dfe\ZoomVe\Helper\Config;
+use Dfe\ZoomVe\OriginCityLocator as OCL;
 use Magento\CatalogInventory\Api\StockRegistryInterface;
 use Magento\Directory\Helper\Data;
 use Magento\Directory\Model\CountryFactory;
 use Magento\Directory\Model\CurrencyFactory;
-use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Directory\Model\RegionFactory;
 use Magento\Framework\App\Config\ScopeConfigInterface;
 use Magento\Framework\App\ObjectManager;
 use Magento\Framework\Async\CallbackDeferred;
 use Magento\Framework\DataObject;
 use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\HTTP\AsyncClientInterface;
 use Magento\Framework\HTTP\AsyncClient\HttpResponseDeferredInterface;
 use Magento\Framework\HTTP\AsyncClient\Request;
-use Magento\Framework\HTTP\AsyncClientInterface;
 use Magento\Framework\HTTP\ClientFactory;
 use Magento\Framework\Locale\FormatInterface;
+use Magento\Framework\Pricing\PriceCurrencyInterface;
 use Magento\Framework\Xml\Security;
 use Magento\Quote\Model\Quote\Address\RateRequest;
 use Magento\Quote\Model\Quote\Address\RateResult\Error;
@@ -27,20 +28,20 @@ use Magento\Sales\Model\Order\Shipment as OrderShipment;
 use Magento\Shipping\Model\Carrier\AbstractCarrierOnline;
 use Magento\Shipping\Model\Carrier\CarrierInterface;
 use Magento\Shipping\Model\Rate\Result;
-use Magento\Shipping\Model\Rate\Result\ProxyDeferredFactory;
 use Magento\Shipping\Model\Rate\ResultFactory as RateFactory;
+use Magento\Shipping\Model\Rate\Result\ProxyDeferredFactory;
+use Magento\Shipping\Model\Shipment\Request as Shipment;
 use Magento\Shipping\Model\Simplexml\Element;
 use Magento\Shipping\Model\Simplexml\ElementFactory;
+use Magento\Shipping\Model\Tracking\ResultFactory as TrackFactory;
 use Magento\Shipping\Model\Tracking\Result\ErrorFactory as TrackErrorFactory;
 use Magento\Shipping\Model\Tracking\Result\StatusFactory as TrackStatusFactory;
-use Magento\Shipping\Model\Tracking\ResultFactory as TrackFactory;
 use Magento\Store\Model\ScopeInterface;
-use Magento\Shipping\Model\Shipment\Request as Shipment;
+use Magento\Store\Model\StoreManagerInterface;
 use Psr\Log\LoggerInterface;
 use RuntimeException;
 use Throwable;
 use Zend_Http_Client;
-use Magento\Store\Model\StoreManagerInterface;
 class Carrier extends AbstractCarrierOnline implements CarrierInterface
 {
 
@@ -332,7 +333,10 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 			if (empty($originCity)) {
 				$originCity = self::DEFAULT_ORIGIN_CITY;
 			}
-			$rowRequest->setOrigCity($this->configHelper->getCode('origin_city', [$originCity,'code']));
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# "«San Cristóbal» is absent in the `origin_city` list
+			# in `Dfe\ZoomVe\Helper\Config::getConfigData()`": https://github.com/mage2pro/zoom-ve/issues/7
+			$rowRequest->setOrigCity(OCL::p($originCity));
 		}
 
 		if ($request->getDestCountryId()) {

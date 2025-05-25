@@ -8,6 +8,7 @@ namespace Dfe\ZoomVe;
 final class OriginCityLocator {
 	/**
 	 * 2025-05-25
+	 * @used-by \Dfe\ZoomVe\Model\Carrier::setRequest()
 	 */
 	static function p(string $v):int {return dfa(self::d(), mb_strtoupper($v));}
 
