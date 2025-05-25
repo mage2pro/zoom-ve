@@ -349,8 +349,10 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		if ($request->getDestPostcode()) {
 			$rowRequest->setDestPostal($request->getDestPostcode());
 		}
-
-		$destCity = strtoupper($request->getDestCity());
+		# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
+		# https://github.com/mage2pro/zoom-ve/issues/6
+		$destCity = mb_strtoupper($request->getDestCity());
 		if ($destCity) {
 			$rowRequest->setDestCity($this->configHelper->getCode('origin_city', [$destCity,'code']));
 		}
