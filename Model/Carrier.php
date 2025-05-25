@@ -358,7 +358,10 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		# https://github.com/mage2pro/zoom-ve/issues/6
 		$destCity = mb_strtoupper($request->getDestCity());
 		if ($destCity) {
-			$rowRequest->setDestCity($this->configHelper->getCode('origin_city', [$destCity,'code']));
+			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# "«San Cristóbal» is absent in the `origin_city` list
+			# in `Dfe\ZoomVe\Helper\Config::getConfigData()`": https://github.com/mage2pro/zoom-ve/issues/7
+			$rowRequest->setDestCity(OCL::p($destCity));
 		}
 
 		$weight = $this->getTotalNumOfBoxes($request->getPackageWeight());
