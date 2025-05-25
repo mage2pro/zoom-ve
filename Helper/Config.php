@@ -1,5 +1,7 @@
 <?php
 namespace Dfe\ZoomVe\Helper;
+# 2025-05-25
+/** @used-by dfe_zv_cfg() */
 class Config
 {
 	/**
