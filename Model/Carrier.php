@@ -353,15 +353,17 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		if ($request->getDestPostcode()) {
 			$rowRequest->setDestPostal($request->getDestPostcode());
 		}
-		# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
-		# "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
-		# https://github.com/mage2pro/zoom-ve/issues/6
-		$destCity = mb_strtoupper($request->getDestCity());
-		if ($destCity) {
+		# 2025-05-28 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# «mb_strtoupper(): Passing null to parameter #1 ($string) of type string is deprecated
+		# in vendor/mage2pro/zoom-ve/Model/Carrier.php on line 359»:
+		# https://github.com/mage2pro/zoom-ve/issues/12
+		if ($request->getDestCity()) {
 			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
-			# "«San Cristóbal» is absent in the `origin_city` list
+			# 1) "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
+			# https://github.com/mage2pro/zoom-ve/issues/6
+			# 2) "«San Cristóbal» is absent in the `origin_city` list
 			# in `Dfe\ZoomVe\Helper\Config::getConfigData()`": https://github.com/mage2pro/zoom-ve/issues/7
-			$rowRequest->setDestCity(OCL::p($destCity));
+			$rowRequest->setDestCity(OCL::p(mb_strtoupper($request->getDestCity())));
 		}
 
 		$weight = $this->getTotalNumOfBoxes($request->getPackageWeight());
