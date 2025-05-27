@@ -4,20 +4,14 @@
 	,"description": "Zoom shipping service (Venezuela) integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://github.com/mage2pro/zoom-ve"
-	,"license": "MIT"
+	,"license": "Proprietary"
 	,"authors": [
 		{
-			"name": "Dmitrii Fediuk"
-			,"email": "admin@mage2.pro"
-			,"homepage": "https://upwork.com/fl/mage2pro"
-			,"role": "Developer"
+			"name": "Ferreteo C.A.",
+			"email": "admin@ferreteo.com",
+			"homepage": "https://www.ferreteo.com/",
+			"role": "Owner & Developer"
 		}
-        ,{
-            "name": "Agile Codex Ltd."
-            ,"email": "magento@agilecodex.com"
-            ,"homepage": "https://agilecodex.com"
-            ,"role": "Developer"
-        }
 	]
 	,"require": {"mage2pro/core": ">=11.4.6"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\ZoomVe\\": ""}}
