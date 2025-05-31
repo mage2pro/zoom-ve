@@ -1,10 +1,10 @@
 {
 	"name": "mage2pro/zoom-ve"
-	,"version": "1.0.2"
+	,"version": "1.0.3"
 	,"description": "Zoom shipping service (Venezuela) integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://github.com/mage2pro/zoom-ve"
-	,"license": "Proprietary"
+	,"license": "proprietary"
 	,"authors": [{
 		"name": "Ferreteo C.A."
 		,"email": "admin@ferreteo.com"
