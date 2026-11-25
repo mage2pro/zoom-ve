@@ -235,7 +235,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 	 * @return Result|Error|bool
 	 */
 	function collectRates(RateRequest $request) {
-		# 2025-05-24 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# 2025-05-24 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 		# 1) "`zoom.red` requires a weight for `CalcularTarifa`":
 		# https://github.com/ferreteo-com/site/issues/4
 		# 2) `$request->getPackageWeight()` returns «0.0000» for zero weight.
@@ -322,7 +322,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 			$rowRequest->setOrigCity($request->getOrigCity());
 		}
 		else {
-			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 			# "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
 			# https://github.com/mage2pro/zoom-ve/issues/6
 			$originCity = mb_strtoupper( $this->_scopeConfig->getValue(
@@ -333,7 +333,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 			if (empty($originCity)) {
 				$originCity = self::DEFAULT_ORIGIN_CITY;
 			}
-			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 			# "«San Cristóbal» is absent in the `origin_city` list
 			# in `Dfe\ZoomVe\Helper\Config::getConfigData()`": https://github.com/mage2pro/zoom-ve/issues/7
 			$rowRequest->setOrigCity(OCL::p($originCity));
@@ -353,12 +353,12 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		if ($request->getDestPostcode()) {
 			$rowRequest->setDestPostal($request->getDestPostcode());
 		}
-		# 2025-05-28 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# 2025-05-28 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 		# «mb_strtoupper(): Passing null to parameter #1 ($string) of type string is deprecated
 		# in vendor/mage2pro/zoom-ve/Model/Carrier.php on line 359»:
 		# https://github.com/mage2pro/zoom-ve/issues/12
 		if ($request->getDestCity()) {
-			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 			# 1) "`strtoupper` does not work correctly with the Spanish language (e.g.: «SAN CRISTóBAL»)":
 			# https://github.com/mage2pro/zoom-ve/issues/6
 			# 2) "«San Cristóbal» is absent in the `origin_city` list
@@ -460,7 +460,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 		}
 
 		$result = $this->_rateFactory->create();
-		# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 		# "Replace the `VEF` currency with `VES`": https://github.com/mage2pro/zoom-ve/issues/10
 		$vesRate = $this->_getBaseCurrencyRate('VES');
 		//$total = (double) $rowRequest->getBaseSubtotalInclTax() * $vesRate;
@@ -473,7 +473,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 			'cantidad_piezas' => (int) $rowRequest->getQuantityPieces(),
 			//'modalidad_tarifa' => $rowRequest->getModeType(),
 		];
-		# 2025-05-24 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+		# 2025-05-24 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 		# 1) "`zoom.red` / `CalcularTarifa`:
 		# «El valor mínimo que puede declarar al asegurar su envío es de Bs.  943.24.
 		# Debe ingresar una cantidad igual o mayor a esta y a la vez menor o igual a Bs. 471620.5»":
@@ -582,7 +582,7 @@ class Carrier extends AbstractCarrierOnline implements CarrierInterface
 	 */
 	protected function _getRawAmount($amount, $currency) {
 		$currencyFormat = [
-			# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+			# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 			# "Replace the `VEF` currency with `VES`": https://github.com/mage2pro/zoom-ve/issues/10
 			'VES' => [
 				"accuracy"  => ".",

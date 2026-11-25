@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\ZoomVe;
-# 2025-05-25 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+# 2025-05-25 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 # 1) "«San Cristóbal» is absent in the `origin_city` list in `Dfe\ZoomVe\Helper\Config::getConfigData()`":
 # https://github.com/mage2pro/zoom-ve/issues/7
 # 2) `getCiudades`: https://documenter.getpostman.com/view/6789630/S1Zz6V2v#c0910a5d-866a-4185-b999-b54ec817fa42)

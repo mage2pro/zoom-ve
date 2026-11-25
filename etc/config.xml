@@ -15,7 +15,7 @@
 				<sallowspecific>0</sallowspecific>
 				<specificerrmsg>This shipping method is currently unavailable. If you would like to ship using this shipping method, please contact us.</specificerrmsg>
 				<title>Zoom Envios</title>
-<!-- 2025-05-24 Dmitrii Fediuk https://upwork.com/fl/mage2pro
+<!-- 2025-05-24 Dmitrii Fediuk https://github.com/dmitrii-fediuk
 "`zoom.red` requires a weight for `CalcularTarifa`": https://github.com/ferreteo-com/site/issues/4 -->
 				<weight__default>0.1</weight__default>
 			</zoomenvios>
